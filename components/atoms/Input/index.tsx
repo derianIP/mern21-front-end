@@ -1,6 +1,4 @@
-import Image from 'next/image';
-
-interface InputProps {
+export interface InputProps {
     label: string;
 }
 export default function Input(props: InputProps) {

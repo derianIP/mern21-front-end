@@ -1,9 +1,27 @@
+import { useRouter } from 'next/dist/client/router';
+import { useCallback, useEffect } from 'react';
 import Footer from '../../components/organisms/Footer';
 import Navbar from '../../components/organisms/Navbar';
 import TopUpForm from '../../components/organisms/TopUpForm';
 import TopUpItem from '../../components/organisms/TopUpItem';
+import { getDetailVoucher } from '../../services/player';
 
 export default function Detail() {
+  const { query, isReady } = useRouter();
+
+  const getDetailVoucherAPI = useCallback(async (id) => {
+    const data = await getDetailVoucher(id);
+    console.log(data);
+  }, []);
+
+  useEffect(() => {
+    if (isReady) {
+      console.log('query is Ready', query.id);
+      getDetailVoucherAPI(query.id);
+    } else {
+      console.log('query is not ready');
+    }
+  }, [isReady]);
   return (
     <>
       <Navbar />
